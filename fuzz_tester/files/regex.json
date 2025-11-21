@@ -1,0 +1,4 @@
+{
+    "regex": "^(?:[ab]*bb(a*b)*a*ab[ab]*|abb|[ab]*ab(a*b)*bb)ba[ab][ab]a$"
+}
+
