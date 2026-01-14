@@ -1,4 +1,4 @@
 {
-    "regex": "^(?=.*ba[ab]{2}a$)(?:abb|[ab]*(?:bb(?:a*b)*a+b[ab]*|ab(?:a*b)*bb)).....$"
+    "regex": "^(?=.+ba[ab]{2}a$)(?:abb|[ab]*(?:bb(?:a*b)*a+b[ab]*|ab(?:a*b)*bb)).....$"
 }
 

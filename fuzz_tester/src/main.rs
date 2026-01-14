@@ -9,6 +9,9 @@ use std::io::{self, Write};
 mod automata;
 use crate::automata::{AFA, DFA, NFA};
 
+mod equiv_builder;
+use crate::equiv_builder::{DistinguishingTable, build_distinguishing_table,export_table_to_csv};
+
 pub fn read_regex(filename: &str) -> Result<String, io::Error> {
     let regex_string = fs::read_to_string(filename)?;
     let parser: Value = serde_json::from_str(regex_string.as_str())?;
@@ -247,6 +250,17 @@ fn main() -> io::Result<()> {
         println!("Examples of success:");
         succ.iter().for_each(print_test);
     }
+
+    // Таблица классов эквивалентности для состояний ДКА
+    let new_dfa = DFA::parse_dfa("files/prefix_dfa.json");
+
+    let table = build_distinguishing_table(&new_dfa);
+    
+    // Выводим результаты
+    table.print_table(&new_dfa.states);
+    
+    // Экспортируем таблицу в CSV
+    export_table_to_csv(&table, &new_dfa.states, "distinguishing_table.csv")?; 
 
     // check if the automata are encoded and read correctly
     print!("Print Graphviz source for automata [y/n]? ");
